@@ -1,52 +1,77 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const mongoose = require("mongoose");
-const path = require("path");
+// Filename: server.js
 
-// Import your route modules
-const blogsRoute = require("./Routes/BlogsRoute");
-const userRoute = require("./Routes/UserRoute");
-
-dotenv.config();
+const express = require('express');
+const cors = require('cors');
 
 const app = express();
 
-app.use(express.json());
+// Apply CORS middleware to accept requests from your frontend domain
+app.use(cors({
+  origin: 'https://blogs-mern-frontend.vercel.app', // Adjust as per your frontend app's URL
+  credentials: true,
+}));
 
-// Explicit CORS configuration
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://blogs-mern-frontend.vercel.app');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  if (req.method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-    return res.status(200).json({});
-  }
-  next();
+// Test endpoint to check CORS setup
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'CORS-enabled response' });
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+// Connect to your database and additional setup if necessary
 
-// Use the API router with prefixed routes
-const apiRouter = express.Router();
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-apiRouter.use("/", blogsRoute);
-apiRouter.use("/auth", userRoute);
 
-// Prefix all API routes
-app.use("/api", apiRouter);
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_DB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => console.log("DB connected successfully"))
-  .catch((err) => console.log(err));
+// const express = require("express");
+// const dotenv = require("dotenv");
+// const mongoose = require("mongoose");
+// const path = require("path");
 
-// Start the server
-app.listen(process.env.PORT, () => {
-    console.log(`Server running on Port ${process.env.PORT}`);
-});
+// // Import your route modules
+// const blogsRoute = require("./Routes/BlogsRoute");
+// const userRoute = require("./Routes/UserRoute");
+
+// dotenv.config();
+
+// const app = express();
+
+// app.use(express.json());
+
+// // Explicit CORS configuration
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', 'https://blogs-mern-frontend.vercel.app');
+//   res.header('Access-Control-Allow-Credentials', 'true');
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+//   if (req.method === 'OPTIONS') {
+//     res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+//     return res.status(200).json({});
+//   }
+//   next();
+// });
+
+// app.use(express.static(path.join(__dirname, 'public')));
+
+// // Use the API router with prefixed routes
+// const apiRouter = express.Router();
+
+// apiRouter.use("/", blogsRoute);
+// apiRouter.use("/auth", userRoute);
+
+// // Prefix all API routes
+// app.use("/api", apiRouter);
+
+// // Connect to MongoDB
+// mongoose.connect(process.env.MONGO_DB_URL, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// }).then(() => console.log("DB connected successfully"))
+//   .catch((err) => console.log(err));
+
+// // Start the server
+// app.listen(process.env.PORT, () => {
+//     console.log(`Server running on Port ${process.env.PORT}`);
+// });
 
 
 // const express = require("express")
