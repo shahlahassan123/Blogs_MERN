@@ -1,0 +1,49 @@
+body,p{
+    margin: 0;
+    padding: 0;
+    /* width: 100vw; */
+}
+
+.blog{
+    width: 100%;
+    height: auto;
+    /* margin: 2rem;
+    padding: 1rem; */
+}
+
+
+.title{
+    height: 12%;
+}
+
+.image{
+  width: 90%;
+  height: auto;
+  object-fit: cover;
+}
+
+
+.time,.author-time-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.time-icon{
+    padding: 0.2rem;
+}
+
+.author-time-container{
+    justify-content: space-between;
+    width: 90%;
+}
+
+.content{
+    margin-top: 1rem;
+}
+
+
+.blog-container{
+margin: 2rem;
+padding: 1rem;
+
+}
