@@ -46,8 +46,8 @@ const AuthProvider = ({children}) => {
         console.log("Logged out")
         setUser(null)
         setToken(null)
-        // navigate("/login")
-        window.location.href = "/login";
+        navigate("/login")
+        // window.location.href = "/login";
     }
 
     const authContextValue ={

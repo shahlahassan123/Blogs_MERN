@@ -38,18 +38,4 @@ function App() {
 export default App
 
 
-// Filename: App.jsx
 
-// import React from 'react';
-// import TestCors from './components/TestCors'
-
-// const App = () => {
-//   return (
-//     <div className="App">
-//       <h1>Welcome to the CORS Test</h1>
-//       <TestCors /> {/* Use the TestCors component */}
-//     </div>
-//   );
-// };
-
-// export default App;
