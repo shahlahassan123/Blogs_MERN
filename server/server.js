@@ -5,7 +5,11 @@ const app = express();
 
 
 
-app.use(cors())
+app.use(cors({
+    origin : "https://blogs-mern-frontend.onrender.com/",
+    methods : ['POST', 'GET'],
+    credentials : true
+}))
 
 app.get('/api/test', (req, res) => {
   res.json({ message: 'CORS-enabled response' });
