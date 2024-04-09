@@ -3,11 +3,18 @@ const cors = require('cors');
 
 const app = express();
 
-// Adjust the CORS middleware options
-app.use(cors({
-  origin: 'https://blogs-mern-frontend.vercel.app', // Ensure this matches your frontend's origin
-  credentials: true, // IMPORTANT: This enables cookies and credentials to be included in CORS requests
-}));
+
+
+const options = [
+  cors({
+    origin: '*',
+    methods: '*',
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  })
+];
+
+app.use(options);
 
 app.get('/api/test', (req, res) => {
   res.json({ message: 'CORS-enabled response' });
