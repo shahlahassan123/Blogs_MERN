@@ -6,6 +6,8 @@ const routes = require("./Routes/BlogsRoute")
 const  userRoutes = require("./Routes/UserRoute")
 const path = require("path");
 
+
+
 dotenv.config()
 
 const app = express()
@@ -19,8 +21,15 @@ app.use(cors({
 
 app.use(express.static(path.join(__dirname,'public')));
 
-app.use("/", routes)
-app.use("/auth", userRoutes)
+// Prefix all API routes
+const apiRouter = express.Router();
+// Attach your routes to the router
+apiRouter.use("/", routes);
+apiRouter.use("/auth", userRoutes);
+app.use("/api", apiRouter);
+
+// app.use("/", routes)
+// app.use("/auth", userRoutes)
 // app.use('/uploads', express.static('uploads'));
 
 
