@@ -1,25 +1,23 @@
-// Filename: server.js
-
 const express = require('express');
 const cors = require('cors');
 
 const app = express();
 
-// Apply CORS middleware to accept requests from your frontend domain
+// Adjust the CORS middleware options
 app.use(cors({
-  origin: 'https://blogs-mern-frontend.vercel.app', // Adjust as per your frontend app's URL
-  credentials: true,
+  origin: 'https://blogs-mern-frontend.vercel.app', // Ensure this matches your frontend's origin
+  credentials: true, // IMPORTANT: This enables cookies and credentials to be included in CORS requests
 }));
 
-// Test endpoint to check CORS setup
 app.get('/api/test', (req, res) => {
   res.json({ message: 'CORS-enabled response' });
 });
 
-// Connect to your database and additional setup if necessary
+// Other app setup, like connecting to a database, etc.
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
 
 
 
