@@ -5,16 +5,7 @@ const app = express();
 
 
 
-const options = [
-  cors({
-    origin: '*',
-    methods: '*',
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-  })
-];
-
-app.use(options);
+app.use(cors())
 
 app.get('/api/test', (req, res) => {
   res.json({ message: 'CORS-enabled response' });
