@@ -1,24 +1,71 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express")
+const dotenv = require("dotenv")
+const cors = require("cors")
+const mongoose = require("mongoose")
+const routes = require("./Routes/BlogsRoute")
+const  userRoutes = require("./Routes/UserRoute")
+const path = require("path");
 
-const app = express();
 
 
+dotenv.config()
 
+const app = express()
+
+app.use(express.json())
 app.use(cors({
     origin : "https://blogs-mern-frontend.onrender.com/",
     methods : ['POST', 'GET'],
     credentials : true
 }))
 
-app.get('/api/test', (req, res) => {
-  res.json({ message: 'CORS-enabled response' });
-});
+app.use(express.static(path.join(__dirname,'public')));
 
-// Other app setup, like connecting to a database, etc.
+// Prefix all API routes
+const apiRouter = express.Router();
+// Attach your routes to the router
+apiRouter.use("/", routes);
+apiRouter.use("/auth", userRoutes);
+app.use("/api", apiRouter);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// app.use("/", routes)
+// app.use("/auth", userRoutes)
+// app.use('/uploads', express.static('uploads'));
+
+
+
+mongoose.connect(process.env.MONGO_DB_URL,{
+    useNewUrlParser : true,
+    useUnifiedTopology : true
+}).then(()=> console.log("DB connected successfully")).catch((err)=>console.log(err))
+
+
+app.listen(process.env.PORT, ()=>{
+    console.log(`Server running on Port ${process.env.PORT}`)
+})
+
+// ---
+// const express = require('express');
+// const cors = require('cors');
+
+// const app = express();
+
+
+
+// app.use(cors({
+//     origin : "https://blogs-mern-frontend.onrender.com/",
+//     methods : ['POST', 'GET'],
+//     credentials : true
+// }))
+
+// app.get('/api/test', (req, res) => {
+//   res.json({ message: 'CORS-enabled response' });
+// });
+
+// // Other app setup, like connecting to a database, etc.
+
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 
 
