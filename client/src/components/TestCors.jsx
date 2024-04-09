@@ -5,7 +5,7 @@ import React from 'react';
 
 const TestCors = () => {
   const testCorsEndpoint = () => {
-    const BASE_URL = 'https://blogs-mern-api-one.vercel.app/api/test'; // Adjust accordingly
+    const BASE_URL = 'https://blogs-mern-8ycn.onrender.com/api//test'; // Adjust accordingly
 
     axios.get(BASE_URL, { withCredentials: true })
       .then(response => {
