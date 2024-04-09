@@ -1,6 +1,9 @@
 import axios from 'axios'
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
+
+axios.defaults.withCredentials = true;
+
 const getAllBlogs = (setBlogs) =>{
     axios.get(BASE_URL)
     .then(data=>{
