@@ -40,7 +40,6 @@ const NavBar = () => {
           <label htmlFor="checkbox" className='toggleBtnLabel'>
             <i className="fas fa-moon"></i>
             <i className="fas fa-sun"></i>
-            <span className='ball'></span>
           </label>
        
       </div>
